@@ -15,21 +15,6 @@ lsp.configure("lua_ls", {
     }
 })
 
--- I LOOOVE JAVA
-local path_to_mason = "/home/dhain/.local/share/nvim/mason/"
-local path_to_jdtls = path_to_mason .. "packages/jdtls/"
--- Fix lombok notation processing problem
-lsp.configure("jdtls", {
-    cmd = {
-        path_to_mason .. "bin/jdtls",
-        "--jvm-arg=-javaagent:" .. path_to_jdtls .. "lombok.jar",
-        "-configuration",
-        "/home/dhain/.cache/jdtls/config",
-        "-data",
-        "/home/dhain/.cache/jdtls/workspace"
-    }
-})
-
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({

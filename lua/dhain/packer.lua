@@ -52,7 +52,6 @@ return require("packer").startup(function(use)
 
     -- Git things
     use "tpope/vim-fugitive"
-    use "f-person/git-blame.nvim"
     use "airblade/vim-gitgutter" -- git diff icons in lines
 
     -- The Vim GOD
@@ -95,7 +94,10 @@ return require("packer").startup(function(use)
                     pcall(vim.cmd, "MasonUpdate")
                 end,
             },
-            { "williamboman/mason-lspconfig.nvim" },
+            {
+                "williamboman/mason-lspconfig.nvim",
+                tag = "v1.12.0"
+            },
 
             -- Autocompletion
             { "hrsh7th/nvim-cmp" }, -- Required
