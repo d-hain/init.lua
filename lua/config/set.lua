@@ -1,3 +1,6 @@
+-- Ignore case for searching with /
+vim.opt.ignorecase = true
+
 -- 100 character line
 vim.opt.colorcolumn = "100"
 

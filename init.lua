@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("config.set")
-require("config.remaps")
 require("lazy").setup("plugins", {
     defaults = {
         lazy = false,
@@ -22,5 +21,6 @@ require("lazy").setup("plugins", {
         colorscheme = { "onedark" },
     }
 })
+require("config.remaps")
 
 print("The One Piece ... THE ONE PIECE IS REEAAALLLL!!!")

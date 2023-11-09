@@ -1,11 +1,11 @@
 return {
     -- Colors
-    {
-        "brenoprata10/nvim-highlight-colors",
-        config = function(_, _)
-            require("nvim-highlight-colors").setup {}
-        end
-    },
+    -- {
+    --     "brenoprata10/nvim-highlight-colors",
+    --     config = function(_, _)
+    --         require("nvim-highlight-colors").setup {}
+    --     end
+    -- },
 
     -- Git
     { "airblade/vim-gitgutter" }, -- git diff icons in lines

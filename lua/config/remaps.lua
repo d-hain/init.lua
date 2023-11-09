@@ -1,3 +1,6 @@
+-- Yank to system clipboard
+vim.keymap.set("v", "<leader>y", '"+y')
+
 -- Redo remap
 vim.keymap.set("n", "U", "<C-r>")
 
