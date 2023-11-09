@@ -1,3 +1,7 @@
+-- Display eol, tabs and trailing spaces
+vim.opt.listchars = { eol = "↲", tab = "▸ ", trail = "·" }
+vim.opt.list = true
+
 -- Ignore case for searching with /
 vim.opt.ignorecase = true
 
