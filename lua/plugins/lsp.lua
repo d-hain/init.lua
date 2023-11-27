@@ -175,12 +175,11 @@ return {
                         }
                     )
 
-                    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration, opts)
-                    vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
                     vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    -- FIX: does not completely work -> very sad
                     vim.keymap.set({ "n", "i" }, "<C-n>", function()
                         require("lsp_signature").toggle_float_win()
                     end, opts)

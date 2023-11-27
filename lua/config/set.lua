@@ -1,3 +1,6 @@
+-- Cursor is always thick
+vim.opt.guicursor = ""
+
 -- Display eol, tabs and trailing spaces
 vim.opt.listchars = { eol = "↲", tab = "▸ ", trail = "·" }
 vim.opt.list = true
