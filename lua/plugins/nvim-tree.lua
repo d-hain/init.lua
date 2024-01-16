@@ -1,6 +1,9 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        name = "nvim-tree-web-devicons",
+    },
     config = function(_, _)
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1

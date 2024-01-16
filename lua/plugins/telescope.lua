@@ -1,6 +1,6 @@
 return {
     "nvim-telescope/telescope.nvim",
-    version = "0.1.1",
+    version = "0.1.3",
     dependencies = "nvim-lua/plenary.nvim",
     config = function(_, _)
         local builtin = require("telescope.builtin")

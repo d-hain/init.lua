@@ -92,7 +92,7 @@ return {
             },
             {
                 "williamboman/mason.nvim",
-                version = "v1.8.0",
+                version = "v1.8.3",
                 config = function(_, _)
                     require("mason").setup()
                 end
