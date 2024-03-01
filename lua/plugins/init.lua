@@ -12,12 +12,6 @@ return {
 
     -- QoL
     {
-        "windwp/nvim-autopairs",
-        config = function(_, _)
-            require("nvim-autopairs").setup {}
-        end
-    },
-    {
         "kylechui/nvim-surround",
         config = function(_, _)
             require("nvim-surround").setup {}
@@ -27,5 +21,10 @@ return {
     { "nvim-treesitter/nvim-treesitter-context" },
 
     { "github/copilot.vim" },
-    -- TODO: try out cody from sg.nvim
+    {
+        "seandewar/nvimesweeper",
+        config = function(_, _)
+            vim.g.nvimesweeper_size = 10
+        end
+    },
 }

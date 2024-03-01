@@ -74,6 +74,7 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        version = "0.1.7",
         dependencies = {
             {
                 "folke/trouble.nvim",
@@ -155,10 +156,16 @@ return {
                         root_dir = lspconfig.util.root_pattern("src"),
                     }
                 end,
+                ["ols"] = function()
+                    lspconfig.ols.setup {
+                        capabilities = capabilities,
+                        root_dir = vim.loop.cwd,
+                    }
+                end,
             }
 
             -- Global mappings.
-            vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+            vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float)
             vim.keymap.set("n", "<leader>nd", vim.diagnostic.goto_next)
             vim.keymap.set("n", "<leader>pd", vim.diagnostic.goto_prev)
 
@@ -186,13 +193,17 @@ return {
                     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
                     vim.keymap.set("n", "<leader>f", function()
-                        vim.lsp.buf.format { async = true }
+                        if vim.bo.filetype == "json" then
+                            vim.cmd("%!jq '.'")
+                        else
+                            vim.lsp.buf.format { async = true }
+                        end
                     end, opts)
 
                     local trouble = require("trouble")
 
                     vim.keymap.set("n", "<leader>da", function() trouble.open("document_diagnostics") end, opts)
-                    vim.keymap.set("n", "<leader>vrr", function() trouble.open("lsp_references") end, opts)
+                    vim.keymap.set("n", "<leader>rr", function() trouble.open("lsp_references") end, opts)
                 end,
             })
         end
