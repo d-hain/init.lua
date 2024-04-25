@@ -18,7 +18,6 @@ return {
         end
     },
     { "alvan/vim-closetag" },
-    { "nvim-treesitter/nvim-treesitter-context" },
 
     { "github/copilot.vim" },
     {
