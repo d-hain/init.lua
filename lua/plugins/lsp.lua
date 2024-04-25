@@ -133,6 +133,18 @@ return {
                         },
                     }
                 end,
+                ["rust_analyzer"] = function()
+                    lspconfig.rust_analyzer.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            ["rust-analyzer"] = {
+                                checkOnSave = {
+                                    command = "clippy"
+                                },
+                            }
+                        },
+                    }
+                end,
                 -- clangd setup
                 ["clangd"] = function()
                     lspconfig.clangd.setup {
