@@ -14,6 +14,12 @@ vim.keymap.set("n", "<C-A-j>", "<C-w>j")
 vim.keymap.set("n", "<C-A-k>", "<C-w>k")
 vim.keymap.set("n", "<C-A-l>", "<C-w>l")
 
+-- Window resizing
+vim.keymap.set("n", "<C-A-z>", "<c-w>5<")
+vim.keymap.set("n", "<C-A-i>", "<C-W>-")
+vim.keymap.set("n", "<C-A-u>", "<C-W>+")
+vim.keymap.set("n", "<C-A-o>", "<c-w>5>")
+
 -- Moving Selections/Lines
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv")
