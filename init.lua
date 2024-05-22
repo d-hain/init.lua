@@ -25,7 +25,7 @@ require("config.remaps")
 
 -- Shortcut to get to line and column
 vim.api.nvim_create_user_command("Lc", function(opts)
-    vim.api.nvim_win_set_cursor(0, { tonumber(opts.fargs[1]), tonumber(opts.fargs[2]) })
+    vim.api.nvim_win_set_cursor(0, { tonumber(opts.fargs[1]), tonumber(opts.fargs[2]) - 1 })
 end, { nargs = "+" })
 
 print("The One Piece ... THE ONE PIECE IS REEAAALLLL!!!")
