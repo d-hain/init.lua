@@ -46,7 +46,7 @@ return {
             }
             }
 
-            -- Set configuration for specific filetype.
+            -- Set configuration for gitcommit files
             cmp.setup.filetype("gitcommit", {
                 sources = cmp.config.sources({
                     { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
@@ -54,6 +54,15 @@ return {
                     { name = "buffer" },
                 })
             })
+
+            -- TODO: If I wanna use vim-dadbod sometime
+            -- Set configuration for SQL files (vim-dadbod)
+            -- cmp.setup.filetype({ "sql" }, {
+            --     sources = {
+            --         { name = "vim-dadbod-completion" },
+            --         { name = "buffer" },
+            --     },
+            -- })
 
             -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline("/", {
@@ -204,7 +213,7 @@ return {
                     end, opts)
                     vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "<leader>rn", function()
-                            vim.lsp.buf.rename()
+                        vim.lsp.buf.rename()
                     end, opts)
                     vim.keymap.set("n", "<leader>f", function()
                         vim.lsp.buf.format { async = true }
