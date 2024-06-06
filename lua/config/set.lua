@@ -6,6 +6,9 @@ vim.opt.guicursor = ""
 vim.opt.listchars = { eol = "↲", tab = "  ", trail = "·" }
 vim.opt.list = true
 
+-- Always display sign column
+vim.opt.signcolumn = "yes"
+
 -- Ignore case for searching with /
 vim.opt.ignorecase = true
 
