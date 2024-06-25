@@ -9,10 +9,10 @@ vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>a")
 
 -- Window movement without C-w
-vim.keymap.set("n", "<C-A-h>", "<C-w>h")
-vim.keymap.set("n", "<C-A-j>", "<C-w>j")
-vim.keymap.set("n", "<C-A-k>", "<C-w>k")
-vim.keymap.set("n", "<C-A-l>", "<C-w>l")
+vim.keymap.set("n", "<C-S-h>", "<C-w>h")
+vim.keymap.set("n", "<C-S-j>", "<C-w>j")
+vim.keymap.set("n", "<C-S-k>", "<C-w>k")
+vim.keymap.set("n", "<C-S-l>", "<C-w>l")
 
 -- Window resizing
 vim.keymap.set("n", "<C-A-z>", "<c-w>5<")
