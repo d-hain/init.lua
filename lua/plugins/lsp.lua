@@ -183,6 +183,12 @@ return {
                         root_dir = vim.loop.cwd,
                     }
                 end,
+                ["zls"] = function()
+                    vim.g.zig_fmt_autosave = 0
+                    lspconfig.zls.setup {
+                        capabilities = capabilities,
+                    }
+                end,
             }
 
             -- Global mappings
