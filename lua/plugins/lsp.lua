@@ -163,7 +163,6 @@ return {
                             "--pch-storage=memory",
                             "--completion-style=detailed",
                             "--header-insertion=never",
-
                             "--background-index",
                             "--all-scopes-completion",
                             "--header-insertion-decorators",
