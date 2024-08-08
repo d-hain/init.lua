@@ -19,7 +19,6 @@ return {
     },
     { "alvan/vim-closetag" },
 
-    { "github/copilot.vim" },
     {
         "seandewar/nvimesweeper",
         config = function(_, _)
