@@ -16,9 +16,6 @@ return {
         config = function(_, _)
             local cmp = require("cmp")
 
-            -- require("cmp_nvim_ultisnips").setup()
-            -- local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
-
             cmp.setup {
                 snippet = {
                     expand = function(args)
