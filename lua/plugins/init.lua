@@ -9,7 +9,6 @@ return {
             require("nvim-surround").setup {}
         end
     },
-    { "alvan/vim-closetag" },
 
     {
         "seandewar/nvimesweeper",
