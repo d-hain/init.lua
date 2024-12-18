@@ -6,22 +6,11 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-vsnip",
-
-            -- Snippets
-            "hrsh7th/vim-vsnip",
-            "SirVer/ultisnips",
-            "quangnguyen30192/cmp-nvim-ultisnips",
         },
         config = function(_, _)
             local cmp = require("cmp")
 
             cmp.setup {
-                snippet = {
-                    expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
-                    end,
-                },
                 mapping = cmp.mapping.preset.insert {
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
                     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -35,9 +24,6 @@ return {
                     { name = "nvim_lua" },
                     { name = "buffer" },
                     { name = "path" },
-
-                    { name = "ultisnips" },
-                    { name = "vsnip" },
                 }, {
                 { name = "buffer" },
             }
@@ -97,17 +83,6 @@ return {
                     }
                 end
             },
-            {
-                "williamboman/mason.nvim",
-                version = "v1.8.3",
-                config = function(_, _)
-                    require("mason").setup()
-                end
-            },
-            {
-                "williamboman/mason-lspconfig.nvim",
-                version = "v1.17.0",
-            },
         },
         config = function(_, _)
             local lspconfig = require("lspconfig")
@@ -115,76 +90,63 @@ return {
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
             capabilities.offsetEncoding = { "utf-16" }
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
             -- NOTE: yanked from https://github.com/jdah/dotfiles and I have no idea what it does
             capabilities.textDocument.completion.completionItem.resolveSupport = {
                 properties = { "documentation", "detail", "additionalTextEdits" },
             }
 
-            require("mason-lspconfig").setup_handlers {
-                -- Setup all installed LSP servers with the nvim-cmp capabilities.
-                function(server)
-                    lspconfig[server].setup { capabilities = capabilities }
-                end,
-                ["lua_ls"] = function()
-                    -- Fix undefined global 'vim' warning.
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-                                diagnostics = {
-                                    globals = { "vim" }
-                                }
-                            }
+            -- NOTE: LSPs are installed via Nix
+
+            lspconfig.lua_ls.setup {
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" }
+                        }
+                    }
+                },
+            }
+
+            lspconfig.rust_analyzer.setup {
+                capabilities = capabilities,
+                settings = {
+                    ["rust-analyzer"] = {
+                        checkOnSave = {
+                            command = "clippy"
                         },
                     }
-                end,
-                ["rust_analyzer"] = function()
-                    lspconfig.rust_analyzer.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            ["rust-analyzer"] = {
-                                checkOnSave = {
-                                    command = "clippy"
-                                },
-                            }
-                        },
-                    }
-                end,
-                -- clangd setup
-                ["clangd"] = function()
-                    lspconfig.clangd.setup {
-                        capabilities = capabilities,
-                        cmd = {
-                            "clangd",
-                            "--pch-storage=memory",
-                            "--completion-style=detailed",
-                            "--header-insertion=never",
-                            "--background-index",
-                            "--all-scopes-completion",
-                            "--header-insertion-decorators",
-                            "--function-arg-placeholders",
-                            "--inlay-hints",
-                            "--pretty",
-                            -- TODO: remove or adjust
-                            -- "-j=4",
-                        },
-                        filetypes = { "c", "cpp", "objc", "objcpp" },
-                        root_dir = lspconfig.util.root_pattern("src"),
-                    }
-                end,
-                ["ols"] = function()
-                    lspconfig.ols.setup {
-                        capabilities = capabilities,
-                        root_dir = vim.loop.cwd,
-                    }
-                end,
-                ["zls"] = function()
-                    vim.g.zig_fmt_autosave = 0
-                    lspconfig.zls.setup {
-                        capabilities = capabilities,
-                    }
-                end,
+                },
+            }
+
+            lspconfig.clangd.setup {
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--pch-storage=memory",
+                    "--completion-style=detailed",
+                    "--header-insertion=never",
+                    "--background-index",
+                    "--all-scopes-completion",
+                    "--header-insertion-decorators",
+                    "--function-arg-placeholders",
+                    "--inlay-hints",
+                    "--pretty",
+                    -- TODO: remove or adjust
+                    -- "-j=4",
+                },
+                filetypes = { "c", "cpp", "objc", "objcpp" },
+                root_dir = lspconfig.util.root_pattern("src"),
+            }
+
+            lspconfig.ols.setup {
+                capabilities = capabilities,
+                root_dir = vim.loop.cwd,
+            }
+
+            vim.g.zig_fmt_autosave = 0
+            lspconfig.zls.setup {
+                capabilities = capabilities,
             }
 
             -- Global mappings
