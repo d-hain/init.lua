@@ -1,5 +1,6 @@
 return {
     {
+        -- TODO: Move to blink.cmp sometime when it is more stable
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-buffer",
