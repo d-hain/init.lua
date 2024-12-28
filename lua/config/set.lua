@@ -13,7 +13,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.ignorecase = true
 
 -- 100 character line
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "120"
 
 -- Line Numbers
 vim.opt.nu = true
