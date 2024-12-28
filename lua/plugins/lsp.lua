@@ -150,6 +150,10 @@ return {
                 capabilities = capabilities,
             }
 
+            lspconfig.glsl_analyzer.setup {
+                capabilities = capabilities,
+            }
+
             -- Global mappings
             vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float)
             vim.keymap.set("n", "<leader>nd", vim.diagnostic.goto_next)
