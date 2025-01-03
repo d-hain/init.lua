@@ -67,7 +67,6 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        version = "0.1.7",
         dependencies = {
             {
                 "folke/trouble.nvim",
@@ -151,6 +150,14 @@ return {
             }
 
             lspconfig.glsl_analyzer.setup {
+                capabilities = capabilities,
+            }
+
+            lspconfig.superhtml.setup {
+                capabilities = capabilities,
+            }
+
+            lspconfig.tinymist.setup {
                 capabilities = capabilities,
             }
 
