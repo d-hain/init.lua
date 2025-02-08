@@ -21,12 +21,12 @@ vim.keymap.set("n", "<C-A-u>", "<C-W>+")
 vim.keymap.set("n", "<C-A-o>", "<c-w>5>")
 
 -- Moving Selections/Lines
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv")
-vim.keymap.set("n", "<A-j>", ":m .+1<cr>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
+vim.keymap.set("v", "<A-S-j>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-S-k>", ":m '<-2<cr>gv=gv")
+vim.keymap.set("n", "<A-S-j>", ":m .+1<cr>==")
+vim.keymap.set("n", "<A-S-k>", ":m .-2<CR>==")
+vim.keymap.set("i", "<A-S-j>", "<Esc>:m .+1<CR>==gi")
+vim.keymap.set("i", "<A-S-k>", "<Esc>:m .-2<CR>==gi")
 
 -- Half page jump and searching -> center cursor
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
