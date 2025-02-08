@@ -144,11 +144,6 @@ return {
                 root_dir = vim.loop.cwd,
             }
 
-            vim.g.zig_fmt_autosave = 0
-            lspconfig.zls.setup {
-                capabilities = capabilities,
-            }
-
             lspconfig.glsl_analyzer.setup {
                 capabilities = capabilities,
             }
