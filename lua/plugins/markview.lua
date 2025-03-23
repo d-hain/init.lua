@@ -3,4 +3,9 @@ return {
     -- Needs "markdown" and "markdown_inline" treesitter parsers
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = false,
+    opts = {
+        typst = {
+            enable = false,
+        },
+    },
 }
