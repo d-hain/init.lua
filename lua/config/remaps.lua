@@ -34,5 +34,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- Undo highlight search using "*"
+-- Undo highlight search done by using '*'
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- Align equal signs
+vim.keymap.set("v", "<C-0>", "<Esc>:'<,'> ! column -t -s= -o= | sed 's/=/ = /g'<CR>")
