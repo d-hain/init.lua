@@ -39,3 +39,11 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Align equal signs
 vim.keymap.set("v", "<C-0>", "<Esc>:'<,'> ! column -t -s= -o= | sed 's/=/ = /g'<CR>")
+
+-- Exit Terminal Mode using Esc
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+-- Open a floating Terminal and build the project using a specified command (default: make)
+vim.keymap.set("n", "<C-b>", function ()
+    require("terminal").open_float_term()
+end)
