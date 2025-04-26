@@ -7,6 +7,10 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
+            {
+                "folke/lazydev.nvim",
+                ft = "lua",
+            }
         },
         config = function(_, _)
             local cmp = require("cmp")
@@ -21,6 +25,7 @@ return {
                     ["<S-Tab>"] = cmp.config.disable,
                 },
                 sources = cmp.config.sources {
+                    { name = "lazydev", group_index = 0 },
                     { name = "nvim_lsp" },
                     { name = "nvim_lua" },
                     { name = "buffer" },
