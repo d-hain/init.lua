@@ -4,13 +4,13 @@ local M = {}
 --- @field build_command string The terminal command to execute when opening the terminal window.
 
 --- @type number | nil
-local float_term_buf = nil
+local term_buf = nil
 
 --- @type number | nil
-local float_term_win = nil
+local term_win = nil
 
 --- @type userdata | nil
-local resize_timer = nil
+local float_resize_timer = nil
 
 --- @type number
 local prev_columns = vim.o.columns
@@ -21,22 +21,31 @@ local prev_lines = vim.o.lines
 --- @type string
 local nvimdotlua_name = "/.nvim.lua"
 
+function M.close_term_win()
+    if term_win and vim.api.nvim_win_is_valid(term_win) then
+        vim.api.nvim_win_close(term_win, true)
+    end
+
+    if float_resize_timer then
+        float_resize_timer:stop()
+        float_resize_timer:close()
+        float_resize_timer = nil
+    end
+
+    term_win = nil
+end
+
+function M.close_term_buf()
+    if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
+        vim.api.nvim_buf_delete(term_buf, { force = true })
+    end
+
+    term_buf = nil
+end
+
 function M.close_float_term()
-    if float_term_win and vim.api.nvim_win_is_valid(float_term_win) then
-        vim.api.nvim_win_close(float_term_win, true)
-    end
-    if float_term_buf and vim.api.nvim_buf_is_valid(float_term_buf) then
-        vim.api.nvim_buf_delete(float_term_buf, { force = true })
-    end
-
-    if resize_timer then
-        resize_timer:stop()
-        resize_timer:close()
-        resize_timer = nil
-    end
-
-    float_term_buf = nil
-    float_term_win = nil
+    M.close_term_win()
+    M.close_term_buf()
 end
 
 --- @param path string | nil
@@ -66,13 +75,13 @@ end
 --- @param cmd string | nil Optional command to run when the terminal is opened.
 function M.open_float_term(cmd)
     -- If already open, do nothing
-    if float_term_win and vim.api.nvim_win_is_valid(float_term_win) then
-        vim.api.nvim_set_current_win(float_term_win)
+    if term_win and vim.api.nvim_win_is_valid(term_win) then
+        vim.api.nvim_set_current_win(term_win)
         return
     end
 
     -- Create buffer
-    float_term_buf = vim.api.nvim_create_buf(false, true)
+    term_buf = vim.api.nvim_create_buf(false, true)
 
     -- Create window
     local function window_opts()
@@ -88,7 +97,7 @@ function M.open_float_term(cmd)
             style = "minimal",
         }
     end
-    float_term_win = vim.api.nvim_open_win(float_term_buf, true, window_opts())
+    term_win = vim.api.nvim_open_win(term_buf, true, window_opts())
 
     -- Open Terminal and run specified command or make if none was specified
     vim.fn.termopen(vim.o.shell)
@@ -105,25 +114,52 @@ function M.open_float_term(cmd)
 
     -- Auto-close when leaving
     vim.api.nvim_create_autocmd("BufLeave", {
-        buffer = float_term_buf,
+        buffer = term_buf,
         callback = M.close_float_term,
         once = true,
     })
 
     -- Timer to watch terminal size
-    resize_timer = vim.uv.new_timer()
-    resize_timer:start(100, 100, vim.schedule_wrap(function()
+    float_resize_timer = vim.uv.new_timer()
+    float_resize_timer:start(100, 100, vim.schedule_wrap(function()
         -- Check if terminal size changed
         if vim.o.columns ~= prev_columns or vim.o.lines ~= prev_lines then
             prev_columns = vim.o.columns
             prev_lines = vim.o.lines
 
             -- Update floating window config
-            if float_term_win and vim.api.nvim_win_is_valid(float_term_win) then
-                vim.api.nvim_win_set_config(float_term_win, window_opts())
+            if term_win and vim.api.nvim_win_is_valid(term_win) then
+                vim.api.nvim_win_set_config(term_win, window_opts())
             end
         end
     end))
+end
+
+function M.float_to_split_term()
+    if not (term_buf and vim.api.nvim_buf_is_valid(term_buf)) then
+        print("No open floating terminal!")
+        return
+    end
+
+    -- Put the terminal in a horizontal split at the bottom of neovim
+    vim.cmd("belowright split")
+    -- Make the split 35% of the total height
+    vim.cmd("resize " .. math.floor(vim.o.lines * 0.35))
+
+    -- Floating window buffer -> split window
+    local split_win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(split_win, term_buf)
+
+    -- Close floating terminal and set the new one
+    M.close_term_win()
+    term_win = split_win
+
+    -- Auto-close when leaving
+    vim.api.nvim_create_autocmd("BufLeave", {
+        buffer = term_buf,
+        callback = M.close_float_term,
+        once = true,
+    })
 end
 
 return M

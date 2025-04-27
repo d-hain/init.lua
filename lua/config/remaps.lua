@@ -43,7 +43,11 @@ vim.keymap.set("v", "<C-0>", "<Esc>:'<,'> ! column -t -s= -o= | sed 's/=/ = /g'<
 -- Exit Terminal Mode using Esc
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
+local terminal = require("terminal")
 -- Open a floating Terminal and build the project using a specified command (default: make)
-vim.keymap.set("n", "<C-b>", function ()
-    require("terminal").open_float_term()
-end)
+-- Command is customizable using a .nvim.lua file in the project directory
+vim.keymap.set("n", "<C-b>", terminal.open_float_term)
+
+-- Floating terminal -> split terminal
+vim.keymap.set("n", "<A-b>", terminal.float_to_split_term)
+vim.keymap.set("t", "<A-b>", terminal.float_to_split_term)
