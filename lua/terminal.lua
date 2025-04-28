@@ -12,6 +12,9 @@ local term_win = nil
 --- @type userdata | nil
 local float_resize_timer = nil
 
+--- @type number | nil
+local float_autoclose_autocmd_id = nil
+
 --- @type number
 local prev_columns = vim.o.columns
 
@@ -113,7 +116,7 @@ function M.open_float_term(cmd)
     end
 
     -- Auto-close when leaving
-    vim.api.nvim_create_autocmd("BufLeave", {
+    float_autoclose_autocmd_id = vim.api.nvim_create_autocmd("BufLeave", {
         buffer = term_buf,
         callback = M.close_float_term,
         once = true,
@@ -153,6 +156,9 @@ function M.float_to_split_term()
     -- Close floating terminal and set the new one
     M.close_term_win()
     term_win = split_win
+
+    -- Do NOT auto-close when leaving
+    vim.api.nvim_del_autocmd(float_autoclose_autocmd_id)
 end
 
 return M
