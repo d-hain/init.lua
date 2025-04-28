@@ -153,13 +153,6 @@ function M.float_to_split_term()
     -- Close floating terminal and set the new one
     M.close_term_win()
     term_win = split_win
-
-    -- Auto-close when leaving
-    vim.api.nvim_create_autocmd("BufLeave", {
-        buffer = term_buf,
-        callback = M.close_float_term,
-        once = true,
-    })
 end
 
 return M
