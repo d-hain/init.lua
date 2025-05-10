@@ -88,7 +88,7 @@ function M.open_float_term(cmd)
 
     -- Create window
     local function window_opts()
-        local width = math.floor(vim.o.columns * 0.5)
+        local width = math.floor(vim.o.columns * 0.7)
         local height = math.floor(vim.o.lines * 0.5)
         return {
             relative = "editor",
