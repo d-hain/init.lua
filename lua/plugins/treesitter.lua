@@ -1,7 +1,25 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
         build = ":TSUpdate",
+        dependencies = {
+            -- NOTE: nvim-treesitter needs to be loaded after markview.nvim
+            -- Needs "markdown" and "markdown_inline" treesitter parsers
+            "OXY2DEV/markview.nvim",
+            lazy = true,
+            ft = { "md" },
+            opts = {
+                markdown = {
+                    code_blocks = {
+                        style = "simple",
+                    },
+                },
+                typst = {
+                    enable = false,
+                },
+            },
+        },
         config = function(_, _)
             require("nvim-treesitter.configs").setup {
                 -- A list of parser names, or "all" (the five listed parsers should always be installed)
