@@ -161,6 +161,14 @@ return {
                 capabilities = capabilities,
             }
 
+            -- TODO: Should work when on neovim 0.12
+            vim.lsp.config.jails = {
+                cmd = { "/home/dhain/Jai/Jails/bin/jails" },
+                filetypes = { "jai" },
+                root_markers = { "build.jai", "main.jai", "jails.json" },
+            }
+            vim.lsp.enable { "jails" }
+
             -- Global mappings
             vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float)
             vim.keymap.set("n", "<leader>nd", vim.diagnostic.goto_next)
@@ -191,7 +199,7 @@ return {
                     vim.keymap.set("n", "<leader>rn", function()
                         vim.lsp.buf.rename()
                     end, opts)
-                    vim.keymap.set("n", "<leader>f", function()
+                    vim.keymap.set({ "n", "v" }, "<leader>f", function()
                         vim.lsp.buf.format { async = true }
                     end, opts)
 
