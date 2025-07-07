@@ -4,6 +4,11 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = false,
     opts = {
+        markdown = {
+            code_blocks = {
+                style = "simple",
+            },
+        },
         typst = {
             enable = false,
         },
