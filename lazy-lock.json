@@ -28,13 +28,11 @@
   "onedark.nvim": { "branch": "master", "commit": "11de4da47f3e69cb70c3ae9816bd8af166cbe121" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "sPoNGe-BoB.nvim": { "branch": "master", "commit": "9e82bdc101b2ce4149f8700847bb6bad87427cd0" },
-  "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
   "undotree": { "branch": "master", "commit": "15d91b0afe04ea9ba5cd53e30190d1602af9a925" },
   "vim-fugitive": { "branch": "master", "commit": "593f831d6f6d779cbabb70a4d1e6b1b1936a88af" },
   "vim-gitgutter": { "branch": "main", "commit": "85ca3a087204e3a32cb2faa5d9d0451524e08720" },
-  "vim-illuminate": { "branch": "master", "commit": "0d1e93684da00ab7c057410fecfc24f434698898" },
-  "yazi.nvim": { "branch": "main", "commit": "924db6fa6201d26ab5fc979f92c9ddd77108a453" }
+  "vim-illuminate": { "branch": "master", "commit": "0d1e93684da00ab7c057410fecfc24f434698898" }
 }

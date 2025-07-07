@@ -8,6 +8,25 @@ vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set("n", "<C-s>", "<cmd>w<CR>")
 vim.keymap.set("i", "<C-s>", "<Esc><cmd>w<CR>a")
 
+-- Netrw
+-- Open in cwd
+vim.keymap.set("n", "<leader>pv", function()
+    vim.cmd("Ex " .. vim.fn.getcwd())
+end)
+-- Open in current file's location
+vim.keymap.set("n", "<leader>pw", ":Explore<CR>")
+-- Keybinds in netrw
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "netrw",
+    callback = function()
+        vim.keymap.set("n", "h", "-", { buffer = true, remap = true })
+        vim.keymap.set("n", "l", "<CR>", { buffer = true, remap = true })
+        vim.keymap.set("n", "<Esc>", function()
+            vim.cmd("bprevious")
+        end, { buffer = true })
+    end
+})
+
 -- Window movement without C-w
 vim.keymap.set("n", "<C-S-h>", "<C-w>h")
 vim.keymap.set("n", "<C-S-j>", "<C-w>j")
