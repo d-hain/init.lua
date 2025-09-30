@@ -48,6 +48,20 @@ return {
                     enable = true,
                 },
             }
+
+            -- NOTE:Jai is in Beta currently and not officially supported by nvim-treesitter
+            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+            parser_config.jai = {
+                install_info = {
+                    url = "https://github.com/constantitus/tree-sitter-jai.git",
+                    files = { "src/parser.c", "src/scanner.c" },
+                },
+                filetype = "jai",
+                filetype_to_parsername = "jai",
+                indent = {
+                    enable = true,
+                },
+            }
         end,
     },
 
