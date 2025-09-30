@@ -161,9 +161,16 @@ return {
                 capabilities = capabilities,
             }
 
+            lspconfig.qmlls.setup {
+                capabilities = capabilities,
+            }
+
             -- TODO: Should work when on neovim 0.12
             vim.lsp.config.jails = {
-                cmd = { "/home/dhain/Jai/Jails/bin/jails" },
+                cmd = {
+                    "/home/dhain/Jai/Jails/bin/jails",
+                    -- "-jai_path /home/dhain/Jai/jai/bin",
+                },
                 filetypes = { "jai" },
                 root_markers = { "build.jai", "main.jai", "jails.json" },
             }
