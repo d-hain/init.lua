@@ -161,10 +161,6 @@ return {
                 capabilities = capabilities,
             }
 
-            lspconfig.qmlls.setup {
-                capabilities = capabilities,
-            }
-
             -- TODO: Should work when on neovim 0.12
             vim.lsp.config.jails = {
                 cmd = {
