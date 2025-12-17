@@ -70,19 +70,3 @@ vim.keymap.set("n", "<C-b>", terminal.open_float_term)
 -- Floating terminal -> split terminal
 vim.keymap.set("n", "<A-b>", terminal.float_to_split_term)
 vim.keymap.set("t", "<A-b>", terminal.float_to_split_term)
-
--- gd but try ctags before the default behaviour
-vim.keymap.set("n", "gd", function()
-    local word = vim.fn.expand("<cword>")
-    -- Use Tags
-    if vim.fn.taglist(word) ~= nil and #vim.fn.taglist(word) > 0 then
-        vim.cmd("tag " .. word)
-    else -- No tags available
-        -- Use Lsp then builtin gd
-        if vim.lsp.buf.server_ready() then
-            vim.lsp.buf.definition()
-        else
-            vim.cmd("normal! gd")
-        end
-    end
-end, { silent = true })
