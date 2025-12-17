@@ -172,13 +172,16 @@ return {
             local jai_error = [[%f:%l\,%v: %t%\a\*:%m]]
             vim.o.errorformat = jai_error .. "," .. vim.o.errorformat
 
-            vim.lsp.config.jai = {
+            vim.lsp.config.jails = {
                 capabilities = capabilities,
-                cmd = { "/home/dhain/Jai/Jails/bin/jails", },
-                root_markers = { ".git", "build.jai", "main.jai" },
+                cmd = {
+                    "/home/dhain/Jai/Jails/bin/jails",
+                    "-jai_path", "/home/dhain/Jai/jai/",
+                },
+                root_markers = { "build.jai", "main.jai", ".git" },
                 filetypes = { "jai" }
             }
-            vim.lsp.enable("jai")
+            vim.lsp.enable("jails")
 
             -- Global mappings
             vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float)
