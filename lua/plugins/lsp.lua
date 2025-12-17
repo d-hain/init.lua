@@ -90,8 +90,6 @@ return {
             },
         },
         config = function(_, _)
-            local lspconfig = require("lspconfig")
-
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
             capabilities.offsetEncoding = { "utf-16" }
@@ -102,7 +100,7 @@ return {
 
             -- NOTE: LSPs are installed via Nix
 
-            lspconfig.lua_ls.setup {
+            vim.lsp.config.lua_ls = {
                 capabilities = capabilities,
                 settings = {
                     Lua = {
@@ -112,8 +110,9 @@ return {
                     }
                 },
             }
+            vim.lsp.enable("lua_ls")
 
-            lspconfig.rust_analyzer.setup {
+            vim.lsp.config.rust_analyzer = {
                 capabilities = capabilities,
                 settings = {
                     ["rust-analyzer"] = {
@@ -123,8 +122,9 @@ return {
                     }
                 },
             }
+            vim.lsp.enable("rust_analyzer")
 
-            lspconfig.clangd.setup {
+            vim.lsp.config.clangd = {
                 capabilities = capabilities,
                 cmd = {
                     "clangd",
@@ -141,36 +141,44 @@ return {
                     -- "-j=4",
                 },
                 filetypes = { "c", "cpp", "objc", "objcpp" },
-                root_dir = lspconfig.util.root_pattern("src"),
+                root_dir = vim.loop.cwd,
             }
+            vim.lsp.enable("clangd")
 
-            lspconfig.ols.setup {
+            vim.lsp.config.ols = {
                 capabilities = capabilities,
                 root_dir = vim.loop.cwd,
             }
+            vim.lsp.enable("ols")
 
-            lspconfig.glsl_analyzer.setup {
+            vim.lsp.config.glsl_analyzer = {
                 capabilities = capabilities,
             }
+            vim.lsp.enable("glsl_analyzer")
 
-            lspconfig.superhtml.setup {
+            vim.lsp.config.superhtml = {
                 capabilities = capabilities,
             }
+            vim.lsp.enable("superhtml")
 
-            lspconfig.tinymist.setup {
+            vim.lsp.config.tinymist = {
                 capabilities = capabilities,
             }
+            vim.lsp.enable("tinymist")
 
-            -- TODO: Should work when on neovim 0.12
-            vim.lsp.config.jails = {
-                cmd = {
-                    "/home/dhain/Jai/Jails/bin/jails",
-                    -- "-jai_path /home/dhain/Jai/jai/bin",
-                },
-                filetypes = { "jai" },
-                root_markers = { "build.jai", "main.jai", "jails.json" },
+            vim.filetype.add({ extension = { jai = "jai" }})
+
+            -- Error format for compiler message recognition
+            local jai_error = [[%f:%l\,%v: %t%\a\*:%m]]
+            vim.o.errorformat = jai_error .. "," .. vim.o.errorformat
+
+            vim.lsp.config.jai = {
+                capabilities = capabilities,
+                cmd = { "/home/dhain/Jai/Jails/bin/jails", },
+                root_markers = { ".git", "build.jai", "main.jai" },
+                filetypes = { "jai" }
             }
-            vim.lsp.enable { "jails" }
+            vim.lsp.enable("jai")
 
             -- Global mappings
             vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float)
