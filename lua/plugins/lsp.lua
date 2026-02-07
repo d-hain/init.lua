@@ -167,7 +167,13 @@ return {
             }
             vim.lsp.enable("tinymist")
 
-            vim.filetype.add({ extension = { jai = "jai" }})
+            vim.lsp.config.hls = {
+                capabilities = capabilities,
+                filetypes = { "haskell", "lhaskell", "cabal" },
+            }
+            vim.lsp.enable("hls");
+
+            vim.filetype.add({ extension = { jai = "jai" } })
 
             -- Error format for compiler message recognition
             local jai_error = [[%f:%l\,%v: %t%\a\*:%m]]
